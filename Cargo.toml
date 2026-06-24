@@ -1,0 +1,19 @@
+[package]
+name = "rust-estudo"
+version = "0.1.0"
+edition = "2021"
+autobins = false
+
+[[bin]]
+name = "aula_1_2_1"
+path = "src/bin/bloco_1_2/aula_1_2_1.rs"
+
+[[bin]]
+name = "aula_1_2_2"
+path = "src/bin/bloco_1_2/aula_1_2_2.rs"
+
+[profile.dev]
+overflow-checks = true
+
+[profile.release]
+overflow-checks = false
