@@ -31,9 +31,6 @@ de modo que o aprendizado já segue as decisões de design da engine.
 X11, Wayland, ALSA direto). `std::path::PathBuf` para todos os caminhos.
 Alvos: Linux e Windows desde o início.
 
-> **VNP** que aparece nos arquivos e comentários de código gerados durante o
-> curso é uma sigla legada. O nome oficial da engine é **LVE — Lena Voxel Engine**.
-
 ---
 
 ## Como executar um binário
