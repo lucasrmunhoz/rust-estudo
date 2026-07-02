@@ -40,10 +40,22 @@ fn main() {
     // NÃO corrija nada aqui — só observe e comente o resultado.
 
     // TODO: mundo, lado_i
-    // TODO: println! de mundo / lado_i e mundo % lado_i
-    // TODO: println! de 31 / lado_i e 31 % lado_i
-    // Comentário: o que a intuição de grid esperava para -1, e o que Rust entregou?
+        let mundo:i32 = -1;
+        let lado_i: i32 = 32;
 
+    // TODO: println! de mundo / lado_i e mundo % lado_i
+        println!("Mundo = {}", mundo);
+        println!("Lado i = {}", lado_i);
+        println!("Mundo / lado i = {}", mundo/lado_i);
+        println!("Mundo % lado i = {}", mundo%lado_i);
+
+    // TODO: println! de 31 / lado_i e 31 % lado_i
+        println!("31 / Lado i = {}", 31/lado_i);
+        println!("31 % Lado i = {}", 31%lado_i);
+
+    // Comentário: o que a intuição de grid esperava para -1, e o que Rust entregou?
+        // o comportamento esperado eh do chunk 0 ter as coord 0 a 31 e o chunk -1 de -1 a -32, o resultado da conta Mundo / lado i = 0 indica que o jogador esta no chunk 0 mas o retorna da conta Mundo % lado i da -1 que aponta para um voxel imposivel nesse chunk, 
+        // para usar a ferramenta correta para mapear negativos corretamente eh utilizado (div_euclid/rem_euclid) para numeros mais exatos quando se trata em negativos em rust e no uso da voxel engina para ebvitar esses erros de logica
 
     // ==========================================================
     // SEÇÃO 3 — Visibilidade de face
@@ -54,6 +66,11 @@ fn main() {
     // Teste com pelo menos dois pares de ids que deem resultados diferentes.
 
     // TODO: primeiro par de ids + derivação + combinação + prints
+        let id_atual: u8 = 1;
+        let id_vizinho: u8 = 0;
+        let id_ar: u8 = 0;
+        let atual_eh_solido: bool = id_atual != id_ar;
+        let vizinho_eh_ar: bool = id_vizinho != id_ar;
     // TODO: segundo par de ids + derivação + combinação + prints
 
 
