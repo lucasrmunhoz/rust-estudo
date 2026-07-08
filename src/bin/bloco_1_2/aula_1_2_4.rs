@@ -67,12 +67,21 @@ fn main() {
 
     // TODO: primeiro par de ids + derivação + combinação + prints
         let id_atual: u8 = 1;
-        let id_vizinho: u8 = 0;
+        let mut id_vizinho: u8 = 0;
         let id_ar: u8 = 0;
         let atual_eh_solido: bool = id_atual != id_ar;
-        let vizinho_eh_ar: bool = id_vizinho != id_ar;
+        let mut vizinho_eh_ar: bool = id_vizinho == id_ar;
+        let mut desenhar_face: bool = atual_eh_solido && vizinho_eh_ar;
+            println!("id atual eh {} e id_vizinho eh {}", id_atual, id_vizinho);
+            println!("Voxel atual eh solido?: {}. O voxel vizinho eh ar?: {}", atual_eh_solido, vizinho_eh_ar);
+            println!("Eh para desenhar face? {}", desenhar_face);
     // TODO: segundo par de ids + derivação + combinação + prints
-
+        id_vizinho = 1;
+        vizinho_eh_ar = id_vizinho == id_ar;
+        desenhar_face = atual_eh_solido && vizinho_eh_ar;
+            println!("id atual eh {} e id_vizinho eh {}", id_atual, id_vizinho);
+            println!("Voxel atual eh solido?: {}. O voxel vizinho eh ar?: {}", atual_eh_solido, vizinho_eh_ar);
+            println!("Eh para desenhar face? {}", desenhar_face);
 
     // ==========================================================
     // SEÇÃO 4 — Curto-circuito na borda
@@ -81,9 +90,13 @@ fn main() {
     // Escreva dentro && voxels[idx_vizinho] != 0, onde dentro é a checagem de limite.
     // Avalie com um idx_vizinho válido e com um idx_vizinho fora do intervalo.
     // Não pode dar panic em nenhum dos dois casos. Imprima o bool resultante de cada um.
-
     // TODO: voxels
+        let voxels: [u8; 5] = [1u8, 0, 2, 0, 3];
+        let idx_vizinho: usize = 7;
+        let dentro: bool = idx_vizinho < voxels.len();
+        println!("{}", dentro);
     // TODO: caso com idx_vizinho válido
+
     // TODO: caso com idx_vizinho fora do intervalo
 
 
