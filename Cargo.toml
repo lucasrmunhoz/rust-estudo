@@ -20,6 +20,10 @@ path = "src/bin/bloco_1_2/aula_1_2_3.rs"
 name = "aula_1_2_4"
 path = "src/bin/bloco_1_2/aula_1_2_4.rs"
 
+[[bin]]
+name = "aula_1_2_5"
+path = "src/bin/bloco_1_2/aula_1_2_5.rs"
+
 [profile.dev]
 overflow-checks = true
 
