@@ -145,9 +145,25 @@ fn main() {
     // Imprima os três valores finais.
 
     // TODO: vertices, faces_expostas (mut, inicializados)
+    let mut vertices: usize = 0;
+    let mut faces_expostas:usize = 0;
+        println!("Valor inicial. N de vertices = {}, numero de faces expostas = {}", vertices, faces_expostas);
     // TODO: três incrementos simulando três faces
+    vertices += 4;
+    faces_expostas += 1;
+        println!("Valor com uma adicao. N de vertices = {}, N de faces expostas = {}", vertices, faces_expostas);
+    vertices +=4;
+    faces_expostas += 1;
+    vertices +=4;
+    faces_expostas += 1;
+        println!("Valor com 3 adicoes. N de vertices = {}, N de faces expostas = {}", vertices, faces_expostas);
     // TODO: nivel_luz e atenuação com -=
+    let mut nivel_luz: u8 = 200;
+        println!("O valor inicial da luz eh = {}", nivel_luz);
+    nivel_luz -= 30;
+        println!("O valor final da luz eh = {}", nivel_luz);
     // TODO: prints finais
+        println!("O valor final das variaveis eh: Vertices = {} faces_expostas = {} nivel_luz = {}", vertices, faces_expostas, nivel_luz);
 }
 
 // ==============================================================
