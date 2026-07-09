@@ -55,7 +55,7 @@ fn main() {
 
     // Comentário: o que a intuição de grid esperava para -1, e o que Rust entregou?
         // o comportamento esperado eh do chunk 0 ter as coord 0 a 31 e o chunk -1 de -1 a -32, o resultado da conta Mundo / lado i = 0 indica que o jogador esta no chunk 0 mas o retorna da conta Mundo % lado i da -1 que aponta para um voxel imposivel nesse chunk, 
-        // para usar a ferramenta correta para mapear negativos corretamente eh utilizado (div_euclid/rem_euclid) para numeros mais exatos quando se trata em negativos em rust e no uso da voxel engina para ebvitar esses erros de logica
+        // para usar a ferramenta correta para mapear negativos corretamente eh utilizado (div_euclid/rem_euclid) para numeros mais exatos quando se trata em negativos em rust e no uso da voxel engine para evitar esses erros de logica
 
     // ==========================================================
     // SEÇÃO 3 — Visibilidade de face
