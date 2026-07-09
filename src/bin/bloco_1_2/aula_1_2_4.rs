@@ -116,9 +116,25 @@ fn main() {
     // Imprima ambos e imprima desenhar_a == desenhar_b.
 
     // TODO: vizinho_solido, vizinho_opaco
+    let mut vizinho_solido: bool = true;
+    let mut vizinho_opaco: bool = false;
+        println!("Caso 1. O viznho eh solido? {}, o vizinho eh opaco? {}", vizinho_solido, vizinho_opaco);
     // TODO: desenhar_a, desenhar_b
+    let mut desenhar_a: bool = !(vizinho_solido && vizinho_opaco);
+    let mut desenhar_b: bool = !vizinho_solido || !vizinho_opaco;
     // TODO: println! dos dois e da comparação entre eles
 
+        println!("Caso 1. Eh para desenhar a? {}, eh para desenhar b? {}", desenhar_a, desenhar_b);
+        println!("Caso 1. Desenhar a eh igual a desenhar b? {}", desenhar_a==desenhar_b);
+
+    // caso 2 true true
+    vizinho_opaco = true;
+    // vizinho solido mantem true
+        println!("Caso 2. O viznho eh solido? {}, o vizinho eh opaco? {}", vizinho_solido, vizinho_opaco);
+    desenhar_a = !(vizinho_solido && vizinho_opaco);
+    desenhar_b = !vizinho_solido || !vizinho_opaco;
+        println!("Caso 2. Eh para desenhar a? {}, eh para desenhar b? {}", desenhar_a, desenhar_b);
+        println!("Caso 2. Desenhar a eh igual a desenhar b? {}", desenhar_a==desenhar_b);
 
     // ==========================================================
     // SEÇÃO 6 — Acumuladores do meshing
