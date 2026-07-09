@@ -92,12 +92,19 @@ fn main() {
     // Não pode dar panic em nenhum dos dois casos. Imprima o bool resultante de cada um.
     // TODO: voxels
         let voxels: [u8; 5] = [1u8, 0, 2, 0, 3];
-        let idx_vizinho: usize = 7;
-        let dentro: bool = idx_vizinho < voxels.len();
-        println!("{}", dentro);
+        let mut idx_vizinho: usize = 1;
+        let mut dentro: bool = idx_vizinho < voxels.len();
+            println!(" esta dentro? {}", dentro);
     // TODO: caso com idx_vizinho válido
+        let mut pode_desenhar: bool = dentro && voxels[idx_vizinho] != 0;
+            println!("desenhar voxel antes? {}", pode_desenhar);
 
     // TODO: caso com idx_vizinho fora do intervalo
+        idx_vizinho = 5;
+        dentro = idx_vizinho < voxels.len();
+            println!(" esta dentro? {}", dentro);
+        pode_desenhar = dentro && voxels[idx_vizinho] != 0;
+            println!("desenhar voxel depois? {}", pode_desenhar);
 
 
     // ==========================================================
