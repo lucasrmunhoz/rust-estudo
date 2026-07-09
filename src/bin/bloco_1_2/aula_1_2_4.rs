@@ -136,6 +136,15 @@ fn main() {
         println!("Caso 2. Eh para desenhar a? {}, eh para desenhar b? {}", desenhar_a, desenhar_b);
         println!("Caso 2. Desenhar a eh igual a desenhar b? {}", desenhar_a==desenhar_b);
 
+    //caso 3 false false
+    vizinho_solido = false;
+    vizinho_opaco = false;
+        println!("Caso 3. O viznho eh solido? {}, o vizinho eh opaco? {}", vizinho_solido, vizinho_opaco);
+    desenhar_a = !(vizinho_solido && vizinho_opaco);
+    desenhar_b = !vizinho_solido || !vizinho_opaco;
+        println!("Caso 3. Eh para desenhar a? {}, eh para desenhar b? {}", desenhar_a, desenhar_b);
+        println!("Caso 3. Desenhar a eh igual a desenhar b? {}", desenhar_a==desenhar_b);
+
     // ==========================================================
     // SEÇÃO 6 — Acumuladores do meshing
     // ==========================================================
