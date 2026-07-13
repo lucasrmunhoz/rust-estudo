@@ -101,7 +101,7 @@ d) chunk `-3`, local `6` — em chunks negativos o eixo local conta a partir da 
 
 e) chunk `-3`, local `-26` — o resto euclidiano preserva o sinal do dividendo para que a identidade `q × 32 + r = a` continue válida com quociente arredondado para baixo.
 
-**Resposta:** ⬜
+**Resposta:** c
 
 ---
 
@@ -117,7 +117,7 @@ d) Deve virar `usize::from(id)` porque `id as usize` opera por reinterpretação
 
 e) O cast é desnecessário: como `u8` é unsigned e a paleta tem no máximo 256 entradas, `paleta[id]` compila diretamente — a indexação aceita qualquer inteiro sem sinal.
 
-**Resposta:** ⬜
+**Resposta:** b
 
 ---
 
