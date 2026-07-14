@@ -20,24 +20,69 @@ fn main() {
     // i32: Permite valores negativos e garante compatibilidade com as coordenadas de mundo
     let cam_x: i32 = -64;
     // i32: Suporta valores grandes (até ~2 bilhões), valor escolhido para representar o primeiro inteiro que f32 deixa de representar exatamente
-    let longe_x: i32 = 16_777_217;
+    let far_x: i32 = 16_777_217;
     // i32: Mantém a consistência de tipo com longe_x para permitir comparações e cálculos diretos, escolhido deliberadamente para testar a fronteira de 2²⁴ no cast para f32 
-    let cam_longe_x: i32 = 16_777_000;
+    let cam_far_x: i32 = 16_777_000;
         println!("side {}, id air {}, id broken {}, tough {:?}, cam x {}, longe x {}, cam longe x {}"
-        , side, id_air, id_broken, tough, cam_x, longe_x, cam_longe_x);
+        , side, id_air, id_broken, tough, cam_x, far_x, cam_far_x);
 //item B
     // i32 para representar chunks em posicoes inteiras positivas e negativas, a conta correta usa div euclid para o calculo correto do chunk
-    // as justificado para tranformar side que eh usize pequeno para i32 para a divisao com world_x i32
-    let chunk_x: i32 = world_x / side as i32; // esperado -3 com a conta correta div euclid
+    // as justificado para tranformar side que eh usize pequeno para i32 para a divisao com world_x i32 
+    // estreitamento de side de 8bytes para 4bytes - valor 32 cabe com folga nos dois, usize $0$ a $2^{64} - 1$ (em 64-bit) e i32 $-2.147.483.648$ a $2.147.483.647$ 
+   // let chunk_x: i32 = world_x / side as i32; // esperado -3 com a conta correta div euclid
     // u8 seria o correto pois coordenadas locais sao sempre 0 a 31 quando usando rem euclid corretamente
     // i8 usado pois o teste para mostrar o calculo errado gera uma coord local negativa impossivel
-    // as usado na expressao para trandormar world_x que eh pequeno e i32 para i8 e side que eh usize pequeno para i8, os dois no mesmo tipo para que % funcione corretamente
-    let local_x: i8  = world_x as i8 % side as i8; // esperado 26 com rem.euclid
-        println!("conta errada do chunk x = {} e local x = {}", chunk_x, local_x);
+    // as usado na expressao para trandormar world_x que eh pequeno e i32 para i8 e side que eh usize pequeno para i8, os dois no mesmo tipo para que % funcione corretamente 
+    // estreitamento de world x de 4bytes para 1byte valor -70 ainda cabe, estreitamento de side usize 8bytes para i8 1byte valor 32 cabe ainda, usize = $0$ a $2^{64} - 1$ , i32 = $-2.147.483.648$ a $2.147.483.647$ e i8 = $-128$ a $127$ 
+   // let local_x: i8  = world_x as i8 % side as i8; // esperado 26 com rem.euclid
+   //     println!("conta errada do chunk x = {} e local x = {}", chunk_x, local_x);
     // chunk_x aponta para o chunk errado pois / em coordenadas negativas tem o arrendondamento para o valor inteiro proximo de 0 (-2,18 para -2)
     // local_x aponta para uma coordenada imposivel pois coords local vao de 0 a 31 e % eh o resto de / ((-2 . 32) -6 = -70)
     // o sintoma no jogo seria a busca do chunk errado afetando os voxel do chunk -2 e a busca da coord local -6 causa panic por busca fora do index
     // antes do jogo travar o jogador veria bugs visuais nos voxels do chunk -2
 
+//item C
+    // i32 usado pois chunks podem ser grande e negativos
+    // as usado como estreitamento, side de valor 32 tipo usize 8bytes 2^64 cabe em i32 4bytes 2^31 -1
+    let chunk_x: i32 = world_x.div_euclid(side as i32);
+    let chunk_y: i32 = world_y.div_euclid(side as i32);
+    let chunk_z: i32 = world_z.div_euclid(side as i32);
+        println!("Chunk x = {}, y = {}, z = {}", chunk_x, chunk_y, chunk_z);
+
+    // i32 usado pois rem euclide exige i32
+    // as usado como estreitamento, side de valor 32 tipo usize 8bytes 2^64 cabe em i32 4bytes 2^31 -1
+    let local_x:i32  = world_x.rem_euclid(side as i32);
+    let local_y:i32  = world_y.rem_euclid(side as i32);
+    let local_z:i32  = world_z.rem_euclid(side as i32);
+        println!("Local x = {}, y = {}, z = {}", local_x, local_y, local_z);
+    
+    // bool usado para verificar se a comparacao eh true ou false
+    // as usado como estreitamento, side de valor 32 tipo usize 8bytes 2^64 cabe em i32 4bytes 2^31 -1
+    let axis_x:bool = chunk_x * side as i32 + local_x == world_x;
+    let axis_y:bool = chunk_y * side as i32 + local_y == world_y;
+    let axis_z:bool = chunk_z * side as i32 + local_z == world_z;
+        println!("A reconstrução da coordenada global x a partir do chunk x e local x é válida? {}", axis_x);
+        println!("A reconstrução da coordenada global y a partir do chunk y e local y é válida? {}", axis_y);
+        println!("A reconstrução da coordenada global z a partir do chunk z e local z é válida? {}", axis_z);
+
+// item D
+    // usize usado como tipo padrao de indice
+    // as usado como alargamento e mudanca de sinal, valores locais xyz sao todos positivos pq sao resultados do rem euclid e menores que 32 entao eh uma conversao segura e a parte positiva de i32 0 a 2.147.483.647 cabe dentro de usize 2^64
+    let index_local: usize = local_x as usize + local_y as usize * side + local_z as usize * side * side;
+        println!("O indice local vale {:?}", index_local);
+        println!("O indice local cabe dentro do tamanho max do chunk? {}", index_local < side * side * side);
+
+// item E
+    // usize usado para demonstrar a conversao falha do world_x de valor negativo
+    // as de alargamento e troca de sinal usado de forma desleixada pois i32 para usize nao eh uma conversao segura 
+    // nao ha garantia do valor world x sempre ser positiva entao a conversao pode gerar um numero diferente do esperado
+    // tanto em debug e realese o valor vai ser gerado de forma equivocada pois nao ha mecanismos de checagem do compilador, como em checagens fora do indice
+    // ao tentar indexar o valor gigante no array de voxel teria um prblema de panic tanto em debug quanto em realese pois o array de voxel tem tamanho maximo side^3 -1 e o indice falho ultrapassa ele
+    let fail_conversion: usize = world_x as usize;
+    println!("índice se a conversão viesse antes da garantia = {}", fail_conversion);
+
+// item F
+    let world_x_conversion_fail: f32 = far_x as f32;
+    println!("{}", world_x_conversion_fail);
 
 }
