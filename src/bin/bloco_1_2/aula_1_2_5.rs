@@ -82,7 +82,33 @@ fn main() {
     println!("índice se a conversão viesse antes da garantia = {}", fail_conversion);
 
 // item F
-    let world_x_conversion_fail: f32 = far_x as f32;
-    println!("{}", world_x_conversion_fail);
+    // f32 usado para comunicacao padrao gpu
+    // as cast explcito usado para mudanca de tipo i para f , pode gerar erros em valores acima de 16.777.216 2^24 pelo limite de represtacao exata de f32
+    // Rust irá arredondar o valor para o ponto flutuante representável mais próximo
+    let far_x_f32: f32 = far_x as f32;
+    // f32 usado para comunicacao padrao gpu
+    // as cast esplcito usado no mesmo cenario de far_x e far_x_f32, mas para cam nao ha perda de dados e a conversao gera o resultado exato esperado pois o valor original esta abaixo de 16.777.216 2^24
+    let cam_far_x_f32: f32 = cam_far_x as f32;
+        println!("O valor original de far x eh {} e o valor apos conversao as f32 eh {}", far_x, far_x_f32);
+        println!("O valor original de cam far x eh {} e o valor apos conversao as f32 eh {}", cam_far_x, cam_far_x_f32);
+
+    let delta_farx_camfarx_f32: f32 = cam_far_x_f32 - far_x_f32;
+        println!("O resultado errado obtido convertendo antes de subtrair eh de {}", delta_farx_camfarx_f32);
+    let delta_farx_camfarx: i32 = cam_far_x - far_x;
+        println!("O resultado correto obtido subtraindo antes da conversao eh de {}", delta_farx_camfarx);
+    let delta_x_correto: f32 = delta_farx_camfarx as f32;
+        println!("O delta x das posicoes de modo correto (subtracao -> conversao) tem o valor verdadeiro final igual a {}", delta_x_correto);
+    // == aqui é correto por que não há erro acumulado de arredondamento de operacoes anteriores por que a conversão final delta_farx_camfarx as f32 (no caminho certo) não introduz nenhum arredondamento novo
+        println!("O valores entre o delta correto e o delta errado sao os mesmos? {}", delta_x_correto == delta_farx_camfarx_f32);
+        println!("A diferenca entre o valor correto e o valor errado eh de {} unidade", delta_x_correto - delta_farx_camfarx_f32);
+
+// item g
+    let is_solid:bool = id_broken == id_air;
+    let hardness: usize = is_solid as usize;
+
+    
+
+    
+
 
 }
