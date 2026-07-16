@@ -116,9 +116,9 @@ fn main() {
         println!("O voxel pode ser quebrado? {}", can_break_voxel);
 
 // resposta 1:
-    // short circuit 
-
-    
+    // short circuit eh quando uma expressao booleana eh computada da esquerda para a direita, no caso de && se o primeiro termo for false (o que torna && falso), os outros termos nao sao computados tambem para evitar acesso fora de indes e preservar trabalho computacional com contas desnecessarias
+// resposta 2
+    // bool_index_local previne panic em voxels[index_local] (limite side³); tough[id_broken_u] (tamanho 4) é seguro por design de IDs válidos de bloco.    
 
     
 
