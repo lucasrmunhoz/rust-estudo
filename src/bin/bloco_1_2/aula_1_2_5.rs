@@ -70,8 +70,8 @@ fn main() {
     // as usado como alargamento e mudanca de sinal, valores locais xyz sao todos positivos pq sao resultados do rem euclid e menores que 32 entao eh uma conversao segura e a parte positiva de i32 0 a 2.147.483.647 cabe dentro de usize 2^64
     let index_local: usize = local_x as usize + local_y as usize * side + local_z as usize * side * side;
         println!("O indice local vale {:?}", index_local);
-        println!("O indice local cabe dentro do tamanho max do chunk? {}", index_local < side * side * side);
-
+    let bool_index_local: bool = index_local < side * side * side;
+        println!("O indice local cabe dentro do tamanho max do chunk? {}", bool_index_local);
 // item E
     // usize usado para demonstrar a conversao falha do world_x de valor negativo
     // as de alargamento e troca de sinal usado de forma desleixada pois i32 para usize nao eh uma conversao segura 
@@ -103,8 +103,20 @@ fn main() {
         println!("A diferenca entre o valor correto e o valor errado eh de {} unidade", delta_x_correto - delta_farx_camfarx_f32);
 
 // item g
-    let is_solid:bool = id_broken == id_air;
-    let hardness: usize = is_solid as usize;
+    let is_solid:bool = id_broken != id_air;
+    // Usa `From`. `u8` -> `usize` é garantido (lossless) porque `usize` tem no mínimo 16 bits (maior que os 8 bits do u8).
+    // O oposto não vale para `usize` -> `i32` (risco de estouro de tamanho) nem para `i32` -> `usize` (risco de valores negativos).
+    let id_broken_u: usize = usize::from(id_broken);
+    let broken_voxel_tough: u8 = tough[id_broken_u];
+        println!("Bloco eh solido? {}", is_solid);
+        println!("a dureza do bloco cujo ID é {} é {}", id_broken, broken_voxel_tough);
+
+// item h
+    let can_break_voxel: bool = bool_index_local && is_solid;
+        println!("O voxel pode ser quebrado? {}", can_break_voxel);
+
+// resposta 1:
+    // short circuit 
 
     
 
