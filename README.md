@@ -110,10 +110,12 @@ rust-estudo/
 ├── Cargo.toml                        # autobins = false; [[bin]] explícitos
 ├── Cargo.lock
 ├── README.md
-├── QuestoesObjetivas/
-│   └── Bloco1_2/                     # avaliações e atividades discursivas
-│       ├── aula_1_2_5_avaliacao.md
-│       └── aula_1_2_5_discursiva.md
+├── docs/
+│   ├── convencoes.md                 # convenção de nomenclatura de identificadores
+│   └── QuestoesObjetivas/
+│       └── Bloco1_2/                 # avaliações e atividades discursivas
+│           ├── aula_1_2_5_avaliacao.md
+│           └── aula_1_2_5_discursiva.md
 └── src/
     └── bin/
         └── bloco_1_2/                # binários das aulas do Bloco 1.2
@@ -125,7 +127,7 @@ rust-estudo/
 ```
 
 > A partir do Bloco 1.2, cada aula é um binário `.rs` com entrada `[[bin]]` explícita no `Cargo.toml`.
-> As avaliações objetivas e as atividades discursivas ficam em `QuestoesObjetivas/Bloco1_x/`.
+> As avaliações objetivas e as atividades discursivas ficam em `docs/QuestoesObjetivas/Bloco1_x/`.
 
 ---
 
@@ -224,9 +226,5 @@ protótipo de referência de cada bloco incorpora os conceitos dos blocos anteri
 - Não há CI. A estratégia prevista é GitHub Actions compilando para `linux-gnu`
   e `windows-gnu` assim que existir uma base funcional da engine.
 - Os documentos de currículo (`fase-1-detalhada.md`, `fase-2-detalhada.md`) e as
-  atividades do Bloco 1.1 ainda não estão versionados neste repositório.
-- **`docs/fase-1-detalhada.md` está desatualizado:** as seções *Projeto* e
-  *Critério de validação* do Bloco 1.2 ainda descrevem a tradução dos cinco
-  pseudocódigos. Precisam ser reescritas conforme a definição atual da 1.2.11.
-- **O planejamento do Bloco 1.2 (Ato 3)** ainda descreve a definição antiga da
-  1.2.11 e precisa da mesma correção.
+  atividades do Bloco 1.1 são mantidos apenas no projeto do Claude, por decisão
+  consciente — não são versionados neste repositório.
