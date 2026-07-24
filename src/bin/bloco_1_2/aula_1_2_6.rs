@@ -1,4 +1,8 @@
 
+// fontes canonicas criterio: verdade ja validada
+// chunk side e voxel id air nao derivam de ninguem, as outras derivam de chunk side
+//CHUNK_MESH_FACE_COUNT_NAIVE deriva de CUBE_FACE_COUNT e CHUNK_VOXEL_COUNT; CHUNK_VOXEL_COUNT deriva de CHUNK_SIDE e CHUNK_AREA; CHUNK_AREA deriva de CHUNK_SIDE; e CHUNK_SIDE é a decisão de projeto original
+// se chunk side mudasse de 32 para 16 fosse alterado seria uma unica vez na fonte
 use rust_estudo::consts::{CHUNK_SIDE, CHUNK_AREA, CHUNK_VOXEL_COUNT, CHUNK_SIDE_I32, VOXEL_ID_AIR};
 const CUBE_FACE_COUNT: usize = 6;
 const CHUNK_MESH_FACE_COUNT_NAIVE: usize = CUBE_FACE_COUNT * CHUNK_VOXEL_COUNT;
@@ -9,6 +13,8 @@ fn main (){
     println!("O chunk tem {} voxels", CHUNK_VOXEL_COUNT);
     println!("A aresta do chunk em i32 vale {}", CHUNK_SIDE_I32);
     println!("O voxel com ID ar vale {}", VOXEL_ID_AIR);
+
+    //fontes ad-hoc criterio: uso demonstrativo da aula
 
     // As três coordenadas locais do voxel que o programa vai escrever;
     let voxel_coord_local_x: usize = 27;
